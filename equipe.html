@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Équipe - InfoSanté CI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+       /* MENU LATÉRAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sidebar .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+  background: #e3f2fd;
+  color: #039960;
+}
+
+.sidebar .close-btn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  background: #075229;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: none;
+}
+
+#menu-toggle:checked ~ .sidebar {
+  transform: translateX(0);
+}
+
+#menu-toggle:checked ~ .overlay {
+  display: block;
+}
+
+/* Responsive : menu visible en desktop */
+@media (max-width: 700px) {
+  .sidebar {
+    transform: translateX(0);
+    position: fixed;
+  }
+
+  .hamburger,
+  .overlay,
+  .close-btn {
+    display: none !important;
+  }
+
+  body {
+    margin-left: 260px;
+  }
+}
+
+</style>
+
+</head>
+  <!-- MENU LATÉRAL -->
+<input type="checkbox" id="menu-toggle" class="hidden">
+<aside class="sidebar" id="sidebar">
+  <label for="menu-toggle" class="close-btn lg:hidden">
+    <i class="fas fa-times"></i>
+  </label>
+
+  <div class="logo">
+    <i class="fas fa-heartbeat text-green-400"></i>
+    <span>InfoSanté CI</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="Accueil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+   <!-- <a href="sante_maternelle.html" ><i class="fas fa-baby"></i> Santé Maternelle</a>
+    <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a> -->
+    <!-- <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+    <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a> -->
+    <!-- <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+    <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+    <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+    <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+    <a href="Se connecter.html"><i class="fas fa-envelope"></i> Se connecter</a>
+  </nav>
+</aside>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Bouton hamburger (visible uniquement en mobile) -->
+<label for="menu-toggle" class="hamburger lg:hidden">
+  <i class="fas fa-bars"></i>
+</label>
+
+
+<body class="bg-gradient-to-br from-green-800 to-teal-900 min-h-screen text-gray-800">
+    <header class="bg-white shadow-lg">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-green-800 flex items-center">
+                    <i class="fas fa-heartbeat text-green-600 mr-2"></i>
+                    InfoSanté CI
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Accueil</a>
+                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Fiches Santé</a>
+                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Notre Équipe</a>
+                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <div class="text-center mb-16 animate-fade-in">
+            <span class="text-sm font-semibold tracking-wider uppercase text-green-300">Qui Sommes-Nous</span>
+            <h1 class="text-5xl font-bold text-white mt-3 mb-6">Notre Équipe</h1>
+            <p class="text-xl text-green-100 max-w-3xl mx-auto">
+                Une équipe passionnée et dévouée à l'amélioration de la santé publique en Côte d'Ivoire. 
+                Ensemble, nous avons développé cette plateforme pour rendre l'information de santé accessible à tous.
+            </p>
+        </div>
+
+        <!-- Section Équipe Digitale -->
+        <div class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-3 flex items-center justify-center">
+                    <i class="fas fa-palette text-pink-400 mr-3"></i>
+                    Équipe Digitale
+                </h2>
+                <p class="text-green-200 text-lg">Marketing, Design & Communication</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Membre 1 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.1s;">
+                    <div class="h-64 bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Chef de Projet Digital" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Aïcha KONÉ</h3>
+                        <p class="text-pink-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-crown mr-2"></i>
+                            Chef de Projet Digital
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Responsable de la stratégie marketing et de l'étude de marché. Coordonne les actions de communication et la création de la charte graphique.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-pink-600 hover:text-pink-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-pink-600 hover:text-pink-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membre 2 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="h-64 bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Designer Graphique" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Yao KOUASSI</h3>
+                        <p class="text-blue-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-paint-brush mr-2"></i>
+                            Designer Graphique
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Création du logo, de la charte graphique et des visuels de sensibilisation. Spécialiste Photoshop et Canva pour tous les supports de communication.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-blue-600 hover:text-blue-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-blue-600 hover:text-blue-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membre 3 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Responsable Communication" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mariam TRAORÉ</h3>
+                        <p class="text-purple-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullhorn mr-2"></i>
+                            Responsable Communication
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Gestion des réseaux sociaux et création de contenu éducatif. Développe les campagnes de sensibilisation et les publications Facebook.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Équipe Scientifique -->
+        <div class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-3 flex items-center justify-center">
+                    <i class="fas fa-laptop-code text-green-400 mr-3"></i>
+                    Équipe Scientifique
+                </h2>
+                <p class="text-green-200 text-lg">Développement Web, Bases de Données & Python</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Membre 4 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="h-64 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center overflow-hidden">
+                        <img src="images/ali.jpg" alt="Développeur Full Stack" class="w-full h-full object-cover" >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Ouattara Ali</h3>
+                        <p class="text-green-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-code mr-2"></i>
+                            Développeur 
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Chef développeur du site web InfoSanté CI. Maîtrise HTML, TailwindCSS et la structuration de contenu. Architecture des 3 pages du site.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-green-600 hover:text-green-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-green-600 hover:text-green-700 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membre 5 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="h-64 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Spécialiste Base de Données" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Fatou DIALLO</h3>
+                        <p class="text-cyan-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-database mr-2"></i>
+                            Spécialiste Base de Données
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Conception et gestion de la base de données SQL des fiches santé. Organisation des données par titre et catégorie pour une recherche optimale.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-cyan-600 hover:text-cyan-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-cyan-600 hover:text-cyan-700 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membre 6 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.6s;">
+                    <div class="h-64 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Data Scientist" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Ibrahim SANOGO</h3>
+                        <p class="text-indigo-600 font-semibold mb-3 flex items-center">
+                            <i class="fab fa-python mr-2"></i>
+                            Data Scientist Python
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Développement de scripts Python pour l'analyse des données santé. Génération de statistiques sur les maladies les plus recherchées.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-indigo-600 hover:text-indigo-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-indigo-600 hover:text-indigo-700 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Valeurs -->
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-12 mb-12 animate-fade-in" style="animation-delay: 0.7s;">
+            <h2 class="text-3xl font-bold text-white text-center mb-8">Nos Valeurs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Collaboration</h3>
+                    <p class="text-green-100">
+                        Deux équipes complémentaires travaillant ensemble pour un objectif commun : améliorer la santé publique.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Innovation</h3>
+                    <p class="text-green-100">
+                        Utilisation des technologies modernes pour rendre l'information de santé accessible et compréhensible.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-heart text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Engagement</h3>
+                    <p class="text-green-100">
+                        Dévoués à la mission d'éducation sanitaire et de prévention pour les communautés ivoiriennes.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-3xl p-12 text-center animate-fade-in" style="animation-delay: 0.8s;">
+            <h2 class="text-3xl font-bold text-white mb-4">Rejoignez Notre Mission</h2>
+            <p class="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
+                Vous partagez notre passion pour la santé publique ? Vous souhaitez contribuer à notre plateforme ? 
+                Contactez-nous pour en savoir plus !
+            </p>
+            <a href="#" class="inline-block bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                Nous Contacter
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 mt-12">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-white text-2xl font-bold flex items-center">
+                        <i class="fas fa-heartbeat text-green-500 mr-2"></i> InfoSanté CI
+                    </a>
+                </div>
+                <p class="text-gray-400">&copy; 2025 InfoSanté CI. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+
+  <!-- Script -->
+  <script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+  </script>
+</body>
+</html>

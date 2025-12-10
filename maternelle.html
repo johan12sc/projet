@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Santé Maternelle – Côte d’Ivoire 2025</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Styles -->
+  <style>
+    /* MENU LATÉRAL */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .sidebar .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #555;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .sidebar .nav-links a:hover,
+    .sidebar .nav-links a.active {
+      background: #fce7f3;
+      color: #d63384;
+    }
+    .sidebar .close-btn {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      background: #d63384;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+      display: none;
+    }
+    #menu-toggle:checked ~ .sidebar {
+      transform: translateX(0);
+    }
+    #menu-toggle:checked ~ .overlay {
+      display: block;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        transform: translateX(0) !important;
+      }
+      body {
+        margin-left: 260px;
+      }
+      .hamburger,
+      .overlay,
+      .close-btn {
+        display: none !important;
+      }
+    }
+
+    /* PAGE STYLE */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    .section {
+      background: #fff;
+      margin: 30px 0;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    }
+    .section h2 {
+      color: #ec4899;
+      border-bottom: 3px solid #ec4899;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+      color: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform .3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    .stat-number {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .symptom-card {
+      background: #fce7f3;
+      border-left: 5px solid #ec4899;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+    }
+    .cta-button {
+      background: linear-gradient(135deg, #ec4899, #f472b6);
+      color: #fff;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all .3s;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+      .container {
+        padding: 10px;
+      }
+      .section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- MENU LATÉRAL -->
+  <input type="checkbox" id="menu-toggle" class="hidden">
+  <aside class="sidebar" id="sidebar">
+    <label for="menu-toggle" class="close-btn lg:hidden">
+      <i class="fas fa-times"></i>
+    </label>
+
+    <div class="logo">
+      <i class="fas fa-baby text-pink-400"></i>
+      <span>InfoSanté CI</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
+      <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+      <!-- <a href="fiche.html"><i class="fas fa-file-medical"></i> Fiches Santé</a>
+      <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+      <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+      <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+      <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+      <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+      <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a>
+      <a href="sante_maternelle.html" class="active"><i class="fas fa-baby"></i> Santé Maternelle</a> -->
+      <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+      <a href="Se connecter.html"><i class="fas fa-envelope"></i> Se connecter</a>
+    </nav>
+  </aside>
+
+  <!-- Overlay mobile -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Bouton hamburger (visible uniquement en mobile) -->
+  <label for="menu-toggle" class="hamburger lg:hidden">
+    <i class="fas fa-bars"></i>
+  </label>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-baby"></i> Santé Maternelle – Côte d’Ivoire 2025</h1>
+      <p>Maman en santé, bébé en santé – Suivi, accompagnement, prévention</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-calendar-check"></i> Actualité 2025</h2>
+      <ul>
+        <li><strong>Cliniques mobiles « Maman 2025 »</strong> : 12 unités roulantes dans les districts d’Abidjan, Bouaké, Daloa</li>
+        <li><strong>Kit naissance gratuit</strong> : torchon, couche, savon, serviette – 40 000 kits distribués en 2025</li>
+        <li><strong>Télé-consultation prénatale</strong> via plateforme « MamanCI » (appels gratuits 7j/7)</li>
+        <li><strong>Campagne « Pères engagés »</strong> : sensibilisation des hommes aux accompagnements</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-chart-line"></i> Chiffres 2025</h2>
+      <div class="grid">
+        <div class="stat-card"><div class="stat-number">92 %</div><div>Couverture prénatale (vs 85 % 2024)</div></div>
+        <div class="stat-card"><div class="stat-number">78 %</div><div>Accouchements assistés par personnel qualifié</div></div>
+        <div class="stat-card"><div class="stat-number">220</div><div>Centres de santé certifiés « Maman-friendly »</div></div>
+        <div class="stat-card"><div class="stat-number">15</div><div>Décès maternels / 100 000 naissances (-25 %)</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-stethoscope"></i> Suivi prénatal 2025</h2>
+      <div class="symptom-card">
+        <strong>4 consultations minimum</strong> : 1re avant 12 SA, puis aux 24, 32, 36 SA<br>
+        <strong>Tests systématiques</strong> : VIH, hépatite B, syphilis, anémie, glycémie<br>
+        <strong>Suppléments</strong> : fer + acide folique + vitamine D offerts
+      </div>
+      <p><strong>Nouveauté 2025</strong> : échographie 3D gratuite dans 30 centres publics</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-baby"></i> Accouchement & post-partum</h2>
+      <ul>
+        <li><strong>Salle d’accouchement humaine</strong> : accompagnant autorisé, doula formée</li>
+        <li><strong>Dépistage néonatal</strong> : hypothyroïdie, drépanocytose, surdité</li>
+        <li><strong>Allaitement maternel exclusif</strong> : promotion 6 mois, espaces lactancia dans les mairies</li>
+        <li><strong>Planning familial</strong> : contraception gratuite dès 6 semaines post-partum</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-calendar-week"></i> Journée Nationale Santé Maternelle 2025</h2>
+      <p><strong>11-17 mai 2025</strong> : thème « Maman en sécurité, famille heureuse »</p>
+      <ul>
+        <li>Forums communautaires dans 50 villages</li>
+        <li>Ateliers pères/allaitement</li>
+        <li>Dépistage gratuit VIH/syphilis</li>
+      </ul>
+    </div>
+
+    <div style="text-align:center;margin:40px 0;">
+      <a class="cta-button" href="#"><i class="fas fa-phone"></i> Numéro vert maternité : 145</a>
+      <a class="cta-button" href="#"><i class="fas fa-calendar-check"></i> Prendre rendez-vous</a>
+      <a class="cta-button" href="#"><i class="fas fa-download"></i> Guide maman 2025</a>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+  </script>
+</body>
+</html>

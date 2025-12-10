@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités Santé - InfoSanté CI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<style>
+    /* MENU LATÉRAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #ffffff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sidebar .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+  background: #a1d3eb;
+  color: #07a36f;
+}
+
+.sidebar .close-btn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  background: #1a8a36;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: none;
+}
+
+#menu-toggle:checked ~ .sidebar {
+  transform: translateX(0);
+}
+
+#menu-toggle:checked ~ .overlay {
+  display: block;
+}
+
+/* Responsive : menu visible en desktop */
+@media (max-width: 587px) {
+  .sidebar {
+    transform: translateX(0);
+    position: fixed;
+  }
+
+  .hamburger,
+  .overlay,
+  .close-btn {
+    display: none !important;
+  }
+
+  body {
+    margin-left: 260px;
+  }
+}
+
+/* Contenu exemple */
+.content {
+  padding: 40px 20px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+</style>
+<body class="bg-gray-50">
+    <!-- MENU LATÉRAL -->
+<input type="checkbox" id="menu-toggle" class="hidden">
+<aside class="sidebar" id="sidebar">
+  <label for="menu-toggle" class="close-btn lg:hidden">
+    <i class="fas fa-times"></i>
+  </label>
+
+  <div class="logo">
+    <i class="fas fa-heartbeat text-green-400"></i>
+    <span>InfoSanté CI</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="Acceuil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+   <!-- <a href="sante_maternelle.html" ><i class="fas fa-baby"></i> Santé Maternelle</a>
+    <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+    <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+    <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+    <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+    <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+    <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+    <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+    <a href="Se connecter.html"><i class="fas fa-envelope"></i>Se connecter</a>
+  </nav>
+</aside>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Bouton hamburger (visible uniquement en mobile) -->
+<label for="menu-toggle" class="hamburger lg:hidden">
+  <i class="fas fa-bars"></i>
+</label>
+
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-green-800 flex items-center">
+                    <i class="fas fa-heartbeat text-green-600 mr-2"></i>
+                    InfoSanté CI
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="Accueil.html" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Accueil</a>
+                    <a href="fiche.html" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Fiches Santé</a>
+                    <a href="actualite.html" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Actualités</a>
+                    <a href="equipe.html" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Notre Équipe</a>
+                    <a href="Se connecter.html" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Se connecter</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-green-900 via-teal-800 to-blue-900 text-white py-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-4xl mx-auto animate-fade-in">
+                <span class="text-sm font-semibold tracking-wider uppercase text-green-300">Restez Informés</span>
+                <h1 class="text-5xl md:text-6xl font-bold mt-3 mb-6">Actualités Santé</h1>
+                <p class="text-xl text-blue-100 mb-8">
+                    Découvrez les dernières nouvelles, campagnes de sensibilisation et conseils santé pour la Côte d'Ivoire. 
+                    Restez à jour sur les enjeux de santé publique qui vous concernent.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-3xl overflow-hidden shadow-2xl animate-fade-in">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="h-96 lg:h-auto">
+                        <img src="https://images.unsplash.com/photo-1584362917165-526a968579e8?w=800" 
+                             alt="Article principal" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-12 flex flex-col justify-center">
+                        <span class="text-green-200 font-semibold text-sm uppercase tracking-wider mb-3">
+                            <i class="fas fa-star mr-2"></i>Article à la Une
+                        </span>
+                        <h2 class="text-4xl font-bold text-white mb-4">
+                            Campagne Nationale de Lutte Contre le Paludisme 2024
+                        </h2>
+                        <p class="text-green-100 text-lg mb-6">
+                            Le Ministère de la Santé lance une grande campagne de distribution de moustiquaires imprégnées 
+                            dans toutes les régions de Côte d'Ivoire. Découvrez comment protéger votre famille efficacement.
+                        </p>
+                        <div class="flex items-center text-green-200 mb-6">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <span class="mr-6">8 Décembre 2024</span>
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>5 min de lecture</span>
+                        </div>
+                        <a href="#" class="inline-block bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg w-fit">
+                            Lire l'Article Complet
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Categories -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in" style="animation-delay: 0.1s;">
+                <button class="bg-green-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition-all transform hover:scale-105 shadow-md">
+                    <i class="fas fa-th-large mr-2"></i>Toutes
+                </button>
+                <button class="bg-white text-green-600 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition-all border-2 border-green-200">
+                    <i class="fas fa-bug mr-2"></i>Paludisme
+                </button>
+                <button class="bg-white text-green-600 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition-all border-2 border-green-200">
+                    <i class="fas fa-apple-alt mr-2"></i>Nutrition
+                </button>
+                <button class="bg-white text-green-600 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition-all border-2 border-green-200">
+                    <i class="fas fa-hands-wash mr-2"></i>Hygiène
+                </button>
+                <button class="bg-white text-green-600 px-6 py-3 rounded-full font-semibold hover:bg-green-50 transition-all border-2 border-green-200">
+                    <i class="fas fa-syringe mr-2"></i>Vaccination
+                </button>
+                <button class="bg-white text-pink-600 px-6 py-3 rounded-full font-semibold hover:bg-pink-50 transition-all border-2 border-pink-200">
+    <i class="fas fa-ribbon mr-2"></i>Cancer
+</button>
+
+            </div>
+
+            <!-- News Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.2s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500" 
+                             alt="Vaccination" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-syringe mr-1"></i>Vaccination
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>6 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            Calendrier Vaccinal 2024 : Ce Qu'il Faut Savoir
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Mise à jour du calendrier national de vaccination pour les enfants et adultes. 
+                            Découvrez les nouveaux vaccins recommandés.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="images/malnution.jpg" 
+                             alt="Nutrition" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-100 text-green-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-apple-alt mr-1"></i>Nutrition
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>5 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            10 Aliments Locaux Riches en Nutriments
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Guide complet des aliments ivoiriens qui boostent votre santé. De l'igname à l'attiéké, 
+                            découvrez leurs bienfaits.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="images/higine.jpg" 
+                             alt="Hygiène" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-cyan-100 text-cyan-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-hands-wash mr-1"></i>Hygiène
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>4 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            Journée Mondiale du Lavage des Mains
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Comment un geste simple peut sauver des vies. Sensibilisation dans 500 écoles à travers le pays.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.5s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=500" 
+                             alt="Santé Maternelle" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-pink-100 text-pink-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-baby mr-1"></i>Santé Maternelle
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>3 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            Nouvelle Clinique de Suivi Prénatal à Abidjan
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Un centre moderne ouvre ses portes pour accompagner les futures mamans avec des consultations gratuites.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.6s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500" 
+                             alt="Prévention IST" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-purple-100 text-purple-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-shield-virus mr-1"></i>Prévention IST
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>2 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            Journée Mondiale de Lutte Contre le SIDA
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Dépistage gratuit et sensibilisation dans toutes les grandes villes. Brisons les tabous ensemble.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.7s;">
+                    <div class="h-56 overflow-hidden">
+                        <img src="images/paludisme.jpg" 
+                             alt="Paludisme" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-red-100 text-red-600 text-xs font-semibold px-3 py-1 rounded-full">
+                                <i class="fas fa-bug mr-1"></i>Paludisme
+                            </span>
+                            <span class="ml-auto text-gray-500 text-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>1 Déc 2024
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-green-600 transition-colors">
+                            Nouveau Traitement Rapide du Paludisme Disponible
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Des médicaments plus efficaces arrivent dans les centres de santé. Réduction du temps de traitement.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+<!-- Article Cancer du Sein -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.2s;">
+    <div class="h-56 overflow-hidden">
+        <img src="images/cancer.jpg" 
+             alt="Cancer du Sein" 
+             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+    </div>
+    <div class="p-6">
+        <div class="flex items-center mb-3">
+            <span class="bg-pink-100 text-pink-600 text-xs font-semibold px-3 py-1 rounded-full">
+                <i class="fas fa-ribbon mr-1"></i>Cancer du Sein
+            </span>
+            <span class="ml-auto text-gray-500 text-sm">
+                <i class="fas fa-calendar-alt mr-1"></i>6 Déc 2024
+            </span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-pink-600 transition-colors">
+            Dépistage du Cancer du Sein : Ce qu'il faut savoir
+        </h3>
+        <p class="text-gray-600 mb-4">
+            Importance du dépistage précoce, auto-examen mensuel et mammographie recommandée dès 50 ans. 
+            Le dépistage sauve des vies chaque jour.
+        </p>
+        <a href="cancer_sein.html" class="text-pink-600 font-semibold inline-flex items-center hover:text-pink-700">
+            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Article Cancer du Rein -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.4s;">
+    <div class="h-56 overflow-hidden">
+        <img src="images/cancer.jpg" 
+             alt="Cancer du Rein" 
+             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+    </div>
+    <div class="p-6">
+        <div class="flex items-center mb-3">
+            <span class="bg-purple-100 text-purple-600 text-xs font-semibold px-3 py-1 rounded-full">
+                <i class="fas fa-ribbon mr-1"></i>Cancer du Rein
+            </span>
+            <span class="ml-auto text-gray-500 text-sm">
+                <i class="fas fa-calendar-alt mr-1"></i>6 Déc 2024
+            </span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-purple-600 transition-colors">
+            Dépistage du Cancer du Rein : Guide Essentiel
+        </h3>
+        <p class="text-gray-600 mb-4">
+            Détection précoce recommandée, surveillance régulière, examens d’imagerie disponibles. 
+            Plus vite détecté, meilleures sont les chances de guérison.
+        </p>
+        <a href="rein.html" class="text-purple-600 font-semibold inline-flex items-center hover:text-purple-700">
+            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+
+<!-- Article Cancer de la Prostate -->
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl animate-fade-in" style="animation-delay: 0.6s;">
+    <div class="h-56 overflow-hidden">
+        <img src="images/cancer.jpg" 
+             alt="Cancer de la Prostate" 
+             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+    </div>
+    <div class="p-6">
+        <div class="flex items-center mb-3">
+            <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">
+                <i class="fas fa-ribbon mr-1"></i>Cancer de la Prostate
+            </span>
+            <span class="ml-auto text-gray-500 text-sm">
+                <i class="fas fa-calendar-alt mr-1"></i>9 Déc 2025
+            </span>
+        </div>
+        <h3 class="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+            Dépistage du Cancer de la Prostate
+        </h3>
+        <p class="text-gray-600 mb-4">
+            Test PSA recommandé dès 50 ans, examen clinique annuel. La détection précoce augmente fortement les chances de guérison.
+        </p>
+        <a href="prostate.html" class="text-blue-600 font-semibold inline-flex items-center hover:text-blue-700">
+            Lire plus <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+    </div>
+</div>
+
+
+
+            <!-- Load More Button -->
+            <div class="text-center mt-12 animate-fade-in" style="animation-delay: 0.8s;">
+                <button class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-10 py-4 rounded-xl font-bold hover:from-green-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg">
+                    <i class="fas fa-sync-alt mr-2"></i>Charger Plus d'Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-gradient-to-r from-green-600 to-teal-600">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center animate-fade-in">
+                <i class="fas fa-envelope-open-text text-6xl text-white mb-6"></i>
+                <h2 class="text-4xl font-bold text-white mb-4">Restez Informé des Actualités Santé</h2>
+                <p class="text-green-100 text-lg mb-8">
+                    Abonnez-vous à notre newsletter pour recevoir les dernières informations de santé publique 
+                    et les campagnes de sensibilisation directement dans votre boîte mail.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-xl mx-auto">
+                    <input type="email" 
+                           placeholder="Votre adresse email" 
+                           class="flex-1 px-6 py-4 rounded-xl focus:outline-none focus:ring-4 focus:ring-green-300 text-gray-800">
+                    <button class="bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                        S'Abonner
+                    </button>
+                </div>
+                <p class="text-green-200 text-sm mt-4">
+                    <i class="fas fa-lock mr-1"></i>Vos données sont protégées. Pas de spam.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Liens Utiles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <a href="#" class="bg-gradient-to-br from-blue-50 to-cyan-50 p-6 rounded-xl border-2 border-blue-200 hover:shadow-lg transition-all text-center group">
+                    <i class="fas fa-file-medical text-4xl text-blue-600 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-gray-900">Fiches Santé</h3>
+                </a>
+                <a href="#" class="bg-gradient-to-br from-green-50 to-lime-50 p-6 rounded-xl border-2 border-green-200 hover:shadow-lg transition-all text-center group">
+                    <i class="fas fa-hospital text-4xl text-green-600 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-gray-900">Centres de Santé</h3>
+                </a>
+                <a href="#" class="bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-xl border-2 border-purple-200 hover:shadow-lg transition-all text-center group">
+                    <i class="fas fa-calendar-check text-4xl text-purple-600 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-gray-900">Événements</h3>
+                </a>
+                <a href="#" class="bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border-2 border-red-200 hover:shadow-lg transition-all text-center group">
+                    <i class="fas fa-phone-alt text-4xl text-red-600 mb-3 group-hover:scale-110 transition-transform"></i>
+                    <h3 class="font-bold text-gray-900">Urgences</h3>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">À Propos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">Notre Mission</a></li>
+                        <li><a href="equipe.html" class="hover:text-white transition-colors">L'Équipe</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Partenaires</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Ressources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="maternelle.html" class="hover:text-white transition-colors">Fiches Santé</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Vidéos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>Abidjan, Côte d'Ivoire</li>
+                        <li><i class="fas fa-phone mr-2"></i>+225 0544781232</li>
+                        <li><i class="fas fa-envelope mr-2"></i>rubico76.o@gmail.com</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Suivez-Nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="#" class="text-white text-2xl font-bold flex items-center">
+                        <i class="fas fa-heartbeat text-green-500 mr-2"></i> InfoSanté CI
+                    </a>
+                </div>
+                <div class="text-sm">
+                    &copy; 2024 InfoSanté CI. Tous droits réservés.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+    <!-- Chargement du menu -->
+<div id="menu-placeholder"></div>
+
+<script>
+    // Fermer le menu si on clique sur un lien (mobile)
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('menu-toggle').checked = false;
+  });
+});
+</script>
+</body>
+</html>

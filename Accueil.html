@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoSanté CI - Éducation Sanitaire et Prévention</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        
+        /* MENU LATÉRAL */
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 260px;
+          height: 100vh;
+          background: #fff;
+          box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+          z-index: 1000;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+        }
+
+        .sidebar .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 1.3rem;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 30px;
+        }
+
+        .sidebar .nav-links a {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          color: #555;
+          text-decoration: none;
+          transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .nav-links a.active {
+          background: #e3f2fd;
+          color: #039960;
+        }
+
+        .sidebar .close-btn {
+          align-self: flex-end;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: #999;
+        }
+
+        .hamburger {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          z-index: 1100;
+          background: #075229;
+          color: white;
+          padding: 10px 14px;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.4);
+          z-index: 999;
+          display: none;
+        }
+
+        #menu-toggle:checked ~ .sidebar {
+          transform: translateX(0);
+        }
+
+        #menu-toggle:checked ~ .overlay {
+          display: block;
+        }
+
+        /* HEADER - visible uniquement desktop */
+        .page-header {
+          background: white;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          display: none;
+        }
+
+        .page-header nav {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 1rem 1.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .page-header .logo-section {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #166534;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .page-header .nav-links-header {
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        .page-header .nav-links-header a {
+          color: #166534;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s;
+        }
+
+        .page-header .nav-links-header a:hover {
+          color: #0d9488;
+        }
+
+        /* RESPONSIVE - Point de rupture à 770px */
+        
+        /* Par défaut (mobile < 770px) : SIDEBAR + BURGER visible, HEADER caché */
+        @media (min-width: 770px) {
+          .page-header {
+            display: block;
+          }
+
+          .sidebar {
+            display: none;
+          }
+
+          .hamburger {
+            display: none;
+          }
+
+          .overlay {
+            display: none;
+          }
+        }
+    </style>
+</head>
+ 
+<body class="bg-gray-50">
+
+  <input type="checkbox" id="menu-toggle" class="hidden">
+  
+  <!-- MENU LATÉRAL (visible < 770px) -->
+  <aside class="sidebar" id="sidebar">
+    <label for="menu-toggle" class="close-btn">
+      <i class="fas fa-times"></i>
+    </label>
+
+    <div class="logo"><br><br>
+      <i class="fas fa-heartbeat text-green-400"></i>
+      <span>InfoSanté CI</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="Accueil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+      <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+      <!-- <a href="sante_maternelle.html"><i class="fas fa-baby"></i> Santé Maternelle</a>
+      <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+      <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+      <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+      <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+      <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+      <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+      <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+      <a href="Se connecter.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+  </aside>
+
+  <!-- Overlay mobile -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Bouton hamburger (visible < 770px) -->
+  <label for="menu-toggle" class="hamburger">
+    <i class="fas fa-bars"></i>
+  </label>
+
+  <!-- HEADER (visible ≥ 770px) -->
+  <header class="page-header">
+    <nav>
+      <div class="logo-section">
+        <i class="fas fa-heartbeat" style="color: #10b981;"></i>
+        InfoSanté CI
+      </div>
+      <div class="nav-links-header">
+        <a href="Accueil.html">Accueil</a>
+        <a href="#fiches">Fiches Santé</a>
+        <a href="actualite.html">Actualités</a>
+        <a href="equipe.html">Notre Équipe</a>
+        <a href="Se connecter.html">Se connecter</a>
+      </div>
+    </nav>
+  </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-green-900 via-teal-800 to-blue-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 py-24 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        InfoSanté CI<span class="gradient-text bg-gradient-to-r from-green-400 to-blue-400"> Votre Santé, Notre Mission</span>
+                    </h1>
+                    <p class="text-xl text-blue-100 mb-8 max-w-lg">
+                        Plateforme d'éducation sanitaire et de prévention pour les écoles et communautés de Côte d'Ivoire. 
+                        Accédez à des fiches pratiques sur le paludisme, les IST, la nutrition et l'hygiène.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#fiches" class="bg-gradient-to-r from-green-500 to-teal-500 text-white px-8 py-4 rounded-xl font-bold hover:from-green-600 hover:to-teal-600 transition-all transform hover:scale-105 shadow-lg text-center">
+                            Consulter les Fiches Santé
+                        </a>
+                        <a href="Se connecter.html" class="bg-white bg-opacity-20 text-white px-8 py-4 rounded-xl font-bold hover:bg-opacity-30 transition-all border border-white border-opacity-30 text-center">
+                            Nous Contacter
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-10 -left-10 w-32 h-32 bg-green-500 rounded-full filter blur-3xl opacity-30"></div>
+                        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl opacity-30"></div>
+                        <img src="images/docteur.jpg" 
+                             alt="Santé en Côte d'Ivoire" 
+                             class="relative z-10 w-full rounded-2xl shadow-2xl floating">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-green-600">Notre Mission</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Éduquer et Prévenir pour une Santé Durable</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 mt-4 text-lg">
+                    Chez <span class="font-semibold text-green-600">InfoSanté CI</span>, nous avons pour mission de fournir aux citoyens 
+                    de Côte d'Ivoire des informations fiables et accessibles sur la santé. 
+                    Nous aidons les écoles, les familles et les communautés à comprendre, prévenir et gérer les problèmes de santé courants.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                    <div class="text-teal-600 mb-4">
+                        <i class="fas fa-book-medical text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Informer</h3>
+                    <p class="text-gray-600 text-sm">
+                        Fournir des informations claires et fiables pour que chacun puisse prendre soin de sa santé.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                    <div class="text-teal-600 mb-4">
+                        <i class="fas fa-shield-alt text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Prévenir</h3>
+                    <p class="text-gray-600 text-sm">
+                        Sensibiliser aux bonnes pratiques d'hygiène, nutrition et prévention des maladies.
+                    </p>
+                </div>
+
+                <div class="p-6 bg-gray-50 rounded-lg shadow hover:shadow-lg transition">
+                    <div class="text-teal-600 mb-4">
+                        <i class="fas fa-hands-helping text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Accompagner</h3>
+                    <p class="text-gray-600 text-sm">
+                        Proposer des ressources pratiques et accessibles pour améliorer le bien-être des communautés.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Health Topics Section -->
+    <section id="fiches" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-green-600">Nos ressources Éducatives</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">NOS FICHE DE SANTE</h2>
+                <p class="max-w-2xl mx-auto text-gray-600 mt-4">
+                    Découvrez nos fiches santé complètes sur les problèmes de santé les plus courants en Côte d'Ivoire.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Fiche 1: Paludisme -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-red-500 to-orange-600 flex items-center justify-center">
+                        <i class="fas fa-bug text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Paludisme</h3>
+                        <p class="text-gray-600 mb-4">
+                            Apprenez à reconnaître les symptômes du paludisme, comment le prévenir avec les moustiquaires 
+                            imprégnées et les mesures d'hygiène environnementale.
+                        </p>
+                        <a href="paludisme.html" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Fiche 2: Hygiène -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                        <i class="fas fa-hands-wash text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Hygiène & Prévention</h3>
+                        <p class="text-gray-600 mb-4">
+                            Découvrez les bonnes pratiques d'hygiène quotidienne : lavage des mains, hygiène alimentaire, 
+                            et assainissement pour éviter les maladies.
+                        </p>
+                        <a href="hygiene.html" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Fiche 3: Nutrition -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-green-500 to-lime-500 flex items-center justify-center">
+                        <i class="fas fa-apple-alt text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Nutrition Équilibrée</h3>
+                        <p class="text-gray-600 mb-4">
+                            Comprenez l'importance d'une alimentation équilibrée, les groupes d'aliments essentiels 
+                            et comment prévenir la malnutrition chez les enfants.
+                        </p>
+                        <a href="nutrition.html" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fiche 4: IST -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-shield-virus text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Infections Sexuellement Transmissibles</h3>
+                        <p class="text-gray-600 mb-4">
+                            Informations essentielles sur la prévention des IST, les méthodes de protection 
+                            et l'importance du dépistage régulier.
+                        </p>
+                        <a href="prostate.html" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fiche 5: Santé Maternelle -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-pink-500 to-rose-500 flex items-center justify-center">
+                        <i class="fas fa-baby text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Santé Maternelle</h3>
+                        <p class="text-gray-600 mb-4">
+                            Conseils pour les femmes enceintes : suivi prénatal, alimentation pendant la grossesse, 
+                            et importance des consultations régulières.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Fiche 6: Vaccination -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="h-48 bg-gradient-to-r from-indigo-500 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-syringe text-white text-6xl"></i>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Vaccination</h3>
+                        <p class="text-gray-600 mb-4">
+                            Calendrier vaccinal pour enfants et adultes, importance de la vaccination 
+                            dans la prévention des maladies infectieuses.
+                        </p>
+                        <a href="#" class="text-green-600 font-semibold inline-flex items-center hover:text-green-700">
+                            Lire la fiche <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-gradient-to-br from-green-600 to-teal-700 text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2">6+</div>
+                    <div class="text-green-200 font-medium">Fiches Santé</div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2">100%</div>
+                    <div class="text-green-200 font-medium">Gratuit</div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2">3</div>
+                    <div class="text-green-200 font-medium">Formats Disponibles</div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="text-5xl font-bold mb-2">24/7</div>
+                    <div class="text-green-200 font-medium">Accès en Ligne</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase text-green-600">Nos Services</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2">Ce Que Nous Proposons</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 p-8 rounded-2xl border-2 border-blue-200 hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-file-pdf text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Fiches Santé PDF</h3>
+                    <p class="text-gray-600">
+                        Téléchargez gratuitement nos fiches santé au format PDF pour une consultation hors ligne 
+                        et une impression facile.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl border-2 border-purple-200 hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-video text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Mini-Vidéos Éducatives</h3>
+                    <p class="text-gray-600">
+                        Visionnez nos courtes vidéos explicatives pour mieux comprendre les concepts de santé 
+                        de manière visuelle et engageante.
+                    </p>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-50 to-lime-50 p-8 rounded-2xl border-2 border-green-200 hover:shadow-xl transition-all">
+                    <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Sensibilisation Communautaire</h3>
+                    <p class="text-gray-600">
+                        Programmes de sensibilisation pour les écoles et communautés avec des affiches 
+                        et supports de communication adaptés.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-green-600 to-teal-700 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Rejoignez Notre Mission de Santé Publique</h2>
+            <p class="max-w-2xl mx-auto text-green-100 mb-8 text-xl">
+                Ensemble, construisons une Côte d'Ivoire en meilleure santé grâce à l'éducation et la prévention.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#fiches" class="bg-white text-green-600 px-8 py-4 rounded-xl font-bold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
+                    Explorer les Fiches
+                </a>
+                <a href="#contact" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-bold hover:bg-white hover:bg-opacity-10 transition-all">
+                    Nous Rejoindre
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">À Propos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">Notre Mission</a></li>
+                        <li><a href="equipe.html" class="hover:text-white transition-colors">L'Équipe</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Partenaires</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Actualités</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Ressources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#fiches" class="hover:text-white transition-colors">Fiches Santé</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Vidéos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Affiches</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition-colors">Pour les Écoles</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Pour les Communautés</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Formation</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Consultation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white text-lg font-semibold mb-4">Suivez-Nous</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paludisme – Côte d'Ivoire</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+        body{background:#f8f9fa;color:#333;line-height:1.6;}
+        .container{max-width:1100px;margin:auto;padding:20px;}
+        .header{background:linear-gradient(135deg, #28a745, #20c997);color:#fff;text-align:center;padding:40px 20px;border-radius:20px;margin-bottom:40px;}
+        .header h1{font-size:2.2rem;margin-bottom:10px;}
+        .section{background:#fff;margin:30px 0;padding:30px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1);}
+        .section h2{color:#28a745;border-bottom:3px solid #28a745;padding-bottom:10px;margin-bottom:20px;font-size:1.8rem;}
+        .stat-card{background:linear-gradient(135deg, #28a745, #20c997);color:#fff;padding:25px;border-radius:15px;text-align:center;transition:transform .3s;}
+        .stat-card:hover{transform:translateY(-5px);}
+        .stat-number{font-size:2.2rem;font-weight:bold;margin-bottom:8px;}
+        .symptom-card{background:#e9f7ef;border-left:5px solid #28a745;padding:20px;margin:15px 0;border-radius:10px;}
+        .cta-button{background:linear-gradient(135deg, #28a745, #20c997);color:#fff;padding:15px 25px;border:none;border-radius:50px;font-size:1rem;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;margin:10px;}
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(40,167,69,.3);}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:25px 0;}
+        
+        /* MENU LATÉRAL */
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 260px;
+          height: 100vh;
+          background: #fff;
+          box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+          z-index: 1000;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+        }
+
+        .sidebar .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 1.3rem;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 30px;
+        }
+
+        .sidebar .nav-links a {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          color: #555;
+          text-decoration: none;
+          transition: background 0.3s, color 0.3s;
+        }
+
+        .sidebar .nav-links a:hover,
+        .sidebar .nav-links a.active {
+          background: #e3f2fd;
+          color: #22cf3fff;
+        }
+
+        .sidebar .close-btn {
+          align-self: flex-end;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: #999;
+        }
+
+        .hamburger {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          z-index: 1100;
+          background: #05e7639c;
+          color: white;
+          padding: 10px 14px;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.4);
+          z-index: 999;
+          display: none;
+        }
+
+        #menu-toggle:checked ~ .sidebar {
+          transform: translateX(0);
+        }
+
+        #menu-toggle:checked ~ .overlay {
+          display: block;
+        }
+
+        /* HEADER - visible uniquement desktop */
+        .page-header {
+          background: white;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          display: none;
+        }
+
+        .page-header nav {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 1rem 1.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .page-header .logo-section {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #166534;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .page-header .nav-links-header {
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        .page-header .nav-links-header a {
+          color: #166534;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s;
+        }
+
+        .page-header .nav-links-header a:hover {
+          color: #0d9488;
+        }
+
+        /* RESPONSIVE - Point de rupture à 770px */
+        
+        /* Par défaut (mobile < 770px) : SIDEBAR + BURGER visible, HEADER caché */
+        @media (min-width: 770px) {
+          .page-header {
+            display: block;
+          }
+
+          .sidebar {
+            display: none;
+          }
+
+          .hamburger {
+            display: none;
+          }
+
+          .overlay {
+            display: none;
+          }
+        }
+
+        @media(max-width:768px){
+          .header h1{font-size:1.8rem;}
+          .container{padding:10px;}
+          .section{padding:20px;}
+        }
+    </style>
+</head>
+<body>
+    <!-- MENU LATÉRAL (visible < 770px) -->
+    <input type="checkbox" id="menu-toggle" class="hidden" style="display:none;">
+    <aside class="sidebar" id="sidebar">
+      <label for="menu-toggle" class="close-btn">
+        <i class="fas fa-times"></i>
+      </label>
+
+      <div class="logo">
+        <i class="fas fa-heartbeat" style="color: #10b981;"></i>
+        <span>InfoSanté CI</span>
+      </div>
+
+      <nav class="nav-links">
+        <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
+        <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+        <!-- <a href="sante_maternelle.html"><i class="fas fa-baby"></i> Santé Maternelle</a>
+        <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+        <a href="paludisme.html" class="active"><i class="fas fa-bug"></i> Paludisme</a>
+        <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+        <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+        <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+        <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+        <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+        <a href="Se connecter.html"><i class="fas fa-envelope"></i> Contact</a>
+      </nav>
+    </aside>
+
+    <!-- Overlay mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Bouton hamburger (visible < 770px) -->
+    <label for="menu-toggle" class="hamburger">
+      <i class="fas fa-bars"></i>
+    </label>
+
+    <!-- HEADER (visible ≥ 770px) -->
+    <header class="page-header">
+      <nav>
+        <div class="logo-section">
+          <i class="fas fa-heartbeat" style="color: #10b981;"></i>
+          InfoSanté CI
+        </div>
+        <div class="nav-links-header">
+          <a href="Accueil.html">Accueil</a>
+          <a href="Accueil.html.#fiches">Fiches Santé</a>
+          <a href="actualite.html">Actualités</a>
+          <a href="equipe.html">Notre Équipe</a>
+          <a href="Se connecter.html">Se connecter</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-bug"></i> Paludisme en Côte d'Ivoire</h1>
+            <p>Prévention, traitement rapide, éradication</p>
+        </div>
+
+        <div style="height: 14rem; overflow: hidden; border-radius: 15px; margin-bottom: 30px;">
+            <img src="images/paludisme.jpg" 
+                 alt="Paludisme" 
+                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;"
+                 onmouseover="this.style.transform='scale(1.1)'"
+                 onmouseout="this.style.transform='scale(1)'">
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-chart-line"></i> Impact local</h2>
+            <div class="grid">
+                <div class="stat-card"><div class="stat-number">3.5 M</div><div>Cas/an (est. 2025)</div></div>
+                <div class="stat-card"><div class="stat-number">5 000</div><div>Décès/an</div></div>
+                <div class="stat-card"><div class="stat-number">40 %</div><div>Consultations CPV*</div></div>
+                <div class="stat-card"><div class="stat-number">100 %</div><div>Zones à risque</div></div>
+            </div>
+            <p style="font-size:0.9em;color:#555;">*Centre de santé primaire</p>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Symptômes typiques</h2>
+            <div class="symptom-card"><strong>Fièvre + frissons + sueurs + maux de tête + douleurs musculaires + fatigue</strong><br>Si fièvre dans une zone palustre = <strong>test palustre immédiat</strong></div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-shield-alt"></i> Prévention (gratuite ou à faible coût)</h2>
+            <ul>
+                <li><strong>MILDA :</strong> Moustiquaires imprégnées distribuées lors des campagnes de vaccination</li>
+                <li><strong>Pulvérisation intradomiciliaire :</strong> équipes communautaires 2x/an</li>
+                <li><strong>Traitement préventif intermittent (TPI) :</strong> femmes enceintes & enfants &lt;5 ans</li>
+                <li><strong>Éliminer les gîtes larvaires :</strong> vider pneus, couvercles, gouttières</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-pills"></i> Nouveau traitement rapide 2024</h2>
+            <p><strong>Artésunate + Amodiaquine dispersible</strong> : disponible dans 1 800 centres, gratuit pour les &lt;5 ans et femmes enceintes. Durée : 3 jours, guérison &gt;95 % si pris dans les 24 h.</p>
+        </div>
+
+        <div style="text-align:center;margin:40px 0;">
+            <a class="cta-button" href="#"><i class="fas fa-phone"></i> Numéro vert CNLP : 143</a>
+            <a class="cta-button" href="#"><i class="fas fa-map-marker-alt"></i> Trouver un centre de test</a>
+        </div>
+    </div>
+
+    <script>
+        // Fermer le menu si on clique sur un lien (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            document.getElementById('menu-toggle').checked = false;
+          });
+        });
+
+        // Fermer le menu si on clique sur l'overlay
+        document.getElementById('overlay').addEventListener('click', () => {
+          document.getElementById('menu-toggle').checked = false;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer du Rein – Côte d'Ivoire 2025</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;}
+        body{background:#f8f9fa;color:#333;line-height:1.6;}
+        .container{max-width:1100px;margin:auto;padding:20px;}
+        .header{background:linear-gradient(135deg, #6f42c1, #e83e8c);color:#fff;text-align:center;padding:40px 20px;border-radius:20px;margin-bottom:40px;}
+        .header h1{font-size:2.2rem;margin-bottom:10px;}
+        .section{background:#fff;margin:30px 0;padding:30px;border-radius:15px;box-shadow:0 5px 15px rgba(0,0,0,.1);}
+        .section h2{color:#6f42c1;border-bottom:3px solid #6f42c1;padding-bottom:10px;margin-bottom:20px;font-size:1.8rem;}
+        .stat-card{background:linear-gradient(135deg, #6f42c1, #e83e8c);color:#fff;padding:25px;border-radius:15px;text-align:center;transition:transform .3s;}
+        .stat-card:hover{transform:translateY(-5px);}
+        .stat-number{font-size:2.2rem;font-weight:bold;margin-bottom:8px;}
+        .symptom-card{background:#f1f1f1;border-left:5px solid #6f42c1;padding:20px;margin:15px 0;border-radius:10px;}
+        .cta-button{background:linear-gradient(135deg, #6f42c1, #e83e8c);color:#fff;padding:15px 25px;border:none;border-radius:50px;font-size:1rem;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-block;margin:10px;}
+        .cta-button:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(111,66,193,.3);}
+        .testimonial{background:#f1f1f1;border-left:5px solid #6f42c1;padding:20px;margin:20px 0;border-radius:10px;}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:25px 0;}
+        @media(max-width:768px){.header h1{font-size:1.8rem;}.container{padding:10px;}.section{padding:20px;}}
+   
+      /* MENU LATÉRAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sidebar .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+  background: #e792e0;
+  color: rgb(131, 15, 185);
+}
+
+.sidebar .close-btn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  background: #880ad1;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: none;
+}
+
+#menu-toggle:checked ~ .sidebar {
+  transform: translateX(0);
+}
+
+#menu-toggle:checked ~ .overlay {
+  display: block;
+}
+
+/* Responsive : menu visible en desktop */
+@media (min-width: 1024px) {
+  .sidebar {
+    transform: translateX(0);
+    position: fixed;
+  }
+
+  .hamburger,
+  .overlay,
+  .close-btn {
+    display: none !important;
+  }
+
+  body {
+    margin-left: 260px;
+  }
+}
+
+   </style>
+</head>
+<body>
+      <!-- MENU LATÉRAL -->
+<input type="checkbox" id="menu-toggle" class="hidden">
+<aside class="sidebar" id="sidebar">
+  <label for="menu-toggle" class="close-btn lg:hidden">
+    <i class="fas fa-times"></i>
+  </label>
+
+  <div class="logo">
+    <i class="fas fa-heartbeat text-green-400"></i>
+    <span>InfoSanté CI</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="Accueil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+   <a href="sante_maternelle.html" ><i class="fas fa-baby"></i> Santé Maternelle</a>
+    <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+    <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+    <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+    <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+    <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+    <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a>
+    <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+    <a href="Se connecter.html"><i class="fas fa-envelope"></i>Se connecter</a>
+  </nav>
+</aside>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Bouton hamburger (visible uniquement en mobile) -->
+<label for="menu-toggle" class="hamburger lg:hidden">
+  <i class="fas fa-bars"></i>
+</label>
+
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-kidney"></i> Cancer du Rein – Côte d'Ivoire 2025</h1>
+        <p>Dépistage précoce, prévention, traitement et espoir</p>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-calendar-alt"></i> Actualité 2025</h2>
+        <div style="background:#e8f4f8;padding:20px;border-radius:10px;margin-bottom:20px;">
+            <h3><i class="fas fa-rocket"></i> Nouveautés 2025</h3>
+            <ul>
+                <li><strong>Scanner 128 coupes</strong> installé à l'Institut National du Cancer (Abidjan) - dépistage plus précis</li>
+                <li><strong>Campagne "Rein 2025"</strong> - 50 000 dépistages gratuits prévus dans tout le pays</li>
+                <li><strong>Nouveau traitement oral</strong> - disponibilité des inhibiteurs TK dès mars 2025</li>
+                <li><strong>Téléconsultation</strong> - suivi des patients à distance via la plateforme e-santé CNHU</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-chart-pie"></i> Chiffres clés 2025</h2>
+        <div class="grid">
+            <div class="stat-card"><div class="stat-number">580</div><div>Nouveaux cas/an</div></div>
+            <div class="stat-card"><div class="stat-number">62 %</div><div>Hommes touchés</div></div>
+            <div class="stat-card"><div class="stat-number">54 ans</div><div>Âge moyen</div></div>
+            <div class="stat-card"><div class="stat-number">35 %</div><div>Guérison si précoce 2025</div></div>
+        </div>
+        <p style="font-size:0.9em;color:#555;">Augmentation de 16% des cas depuis 2024 - nécessité de dépistage accru</p>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-exclamation-circle"></i> Signes d'alerte</h2>
+        <div class="symptom-card"><h3><i class="fas fa-tint"></i> Sang dans les urines</h3><p>Visible ou microscopique – consulter immédiatement.</p></div>
+        <div class="symptom-card"><h3><i class="fas fa-back-pain"></i> Douleur lombaire persistante</h3><p>Unilatérale, sans amélioration au repos.</p></div>
+        <div class="symptom-card"><h3><i class="fas fa-weight"></i> Perte de poids & fièvre 2025</h3><p>Fatigue, sueurs nocturnes, fièvre inexpliquée &gt; 3 semaines.</p></div>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-calendar-alt"></i> Calendrier 2025 des caravanes de dépistage</h2>
+        <ul>
+            <li><strong>Mars :</strong> Districts d'Abidjan (Cocody, Treichville, Yopougon)</li>
+            <li><strong>Juin :</strong> Bouaké, Daloa, Korhogo</li>
+            <li><strong>Septembre :</strong> Man, Danané, Guiglo</li>
+            <li><strong>Novembre :</strong> San-Pédro, Divo, Abengourou</li>
+        </ul>
+        <p><strong>Nouveauté 2025 :</strong> Test urinaire NMP22 disponible dans les caravanes - détection 85% des cas précancéreux</p>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-heart"></i> Témoignage 2025</h2>
+        <div class="testimonial">
+            <h3>Kouadio, 58 ans, Abidjan</h3>
+            <p>« Des urines rosées, j'ai consulté au CHU Cocody : tumeur au stade 1. Opéré en janvier 2025 avec la nouvelle technique robotique, aujourd'hui guéri. Ne négligez pas les signes ! »</p>
+        </div>
+    </div>
+
+    <div style="text-align:center;margin:40px 0;">
+        <a class="cta-button" href="#"><i class="fas fa-phone"></i> Numéro vert 2025 : 0800 000 300</a>
+        <a class="cta-button" href="#"><i class="fas fa-calendar-check"></i> Prendre rendez-vous en ligne</a>
+        <a class="cta-button" href="#"><i class="fas fa-mobile-alt"></i> Télécharger l'app "ReinCI2025"</a>
+    </div>
+</div>
+
+  <!-- Script -->
+  <script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+  </script>
+
+</body>
+</html>

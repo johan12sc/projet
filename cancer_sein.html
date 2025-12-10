@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cancer du Sein – Côte d'Ivoire - Témoignages et Prévention</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* GENERAL */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #d63384, #fd7e14);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 20px;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* SECTIONS */
+    .section {
+      background: white;
+      margin: 30px 0;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      color: #d63384;
+      border-bottom: 3px solid #d63384;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #d63384, #fd7e14);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    /* TESTIMONIALS */
+    .testimonial {
+      background: #fff5f5;
+      border-left: 5px solid #d63384;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .testimonial h3 {
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    /* PREVENTION */
+    .prevention-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+    .prevention-card {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid #d63384;
+      transition: all 0.3s;
+    }
+    .prevention-card:hover {
+      background: #d63384;
+      color: white;
+      transform: translateY(-5px);
+    }
+    .prevention-card i {
+      font-size: 2rem;
+      color: #d63384;
+      margin-bottom: 15px;
+    }
+    .prevention-card:hover i {
+      color: white;
+    }
+
+    /* CTA BUTTON */
+    .cta-button {
+      background: linear-gradient(135deg, #d63384, #fd7e14);
+      color: white;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+    }
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(214, 51, 132, 0.3);
+    }
+
+    /* BANNER */
+    .awareness-banner {
+      background: linear-gradient(135deg, #d63384, #fd7e14);
+      color: white;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    /* MENU LATÉRAL */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+    .sidebar .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    .sidebar .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      color: #555;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .sidebar .nav-links a:hover,
+    .sidebar .nav-links a.active {
+      background: #fce7f3;
+      color: #d63384;
+    }
+    .sidebar .close-btn {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #999;
+    }
+
+    .hamburger {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      background: #d63384;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 999;
+      display: none;
+    }
+
+    #menu-toggle:checked ~ .sidebar {
+      transform: translateX(0);
+    }
+
+    #menu-toggle:checked ~ .overlay {
+      display: block;
+    }
+
+    /* Desktop : menu visible */
+    @media (min-width: 1024px) {
+      .sidebar {
+        transform: translateX(0) !important;
+      }
+      body {
+        margin-left: 260px;
+      }
+      .hamburger,
+      .overlay,
+      .close-btn {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 10px;
+      }
+      .section {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- MENU LATÉRAL -->
+  <input type="checkbox" id="menu-toggle" class="hidden">
+  <aside class="sidebar" id="sidebar">
+    <label for="menu-toggle" class="close-btn lg:hidden">
+      <i class="fas fa-times"></i>
+    </label>
+
+    <div class="logo">
+      <i class="fas fa-ribbon text-pink-400"></i>
+      <span>InfoSanté CI</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
+      <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+      <!-- <a href="sante_maternelle.html"><i class="fas fa-baby"></i> Santé Maternelle</a>
+      <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+      <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+      <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+      <a href="cancer_sein.html" class="active"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+      <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+      <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+      <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+      <a href="Se connecter.html"><i class="fas fa-envelope"></i>Se connecter</a>
+    </nav>
+  </aside>
+
+  <!-- Overlay mobile -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Bouton hamburger (visible uniquement en mobile) -->
+  <label for="menu-toggle" class="hamburger lg:hidden">
+    <i class="fas fa-bars"></i>
+  </label>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="container">
+    <div class="header">
+      <h1><i class="fas fa-ribbon"></i> Cancer du Sein – Côte d’Ivoire</h1>
+      <p>En mémoire de Nadiya Sabeh - Ensemble contre le cancer du sein</p>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-exclamation-triangle"></i> Le Témoignage de Nadiya Sabeh</h2>
+      <div class="testimonial">
+        <h3>Une histoire qui nous touche tous</h3>
+        <p>Le 15 octobre 2024, la Côte d'Ivoire pleurait la disparition de Nadiya Sabeh, célèbre présentatrice télé, victime du cancer du sein à l'âge de 42 ans. Son combat de 3 ans contre la maladie a inspiré des milliers de femmes ivoiriennes à se faire dépister.</p>
+        <p><strong>"Le cancer ne prévient pas. Il frappe sans prévenir. Mais ensemble, nous pouvons le détecter plus tôt."</strong> - Dernière interview de Nadiya Sabeh, septembre 2024</p>
+      </div>
+
+      <div class="video-section">
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle" style="font-size: 4rem; color: #d63384;"></i>
+          <p>Campagne de sensibilisation "Nadia Sabe - October Rose 2024"</p>
+          <p><em>Vidéo: témoignages de femmes survivantes en Côte d'Ivoire</em></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-chart-line"></i> Statistiques en Côte d'Ivoire</h2>
+      <div class="stats">
+        <div class="stat-card"><div class="stat-number">2,500</div><div>Nouveaux cas par an</div></div>
+        <div class="stat-card"><div class="stat-number">40%</div><div>Décès évitables avec dépistage précoce</div></div>
+        <div class="stat-card"><div class="stat-number">35 ans</div><div>Âge moyen de diagnostic</div></div>
+        <div class="stat-card"><div class="stat-number">15%</div><div>Femmes se font dépister régulièrement</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-shield-alt"></i> Prévention et Dépistage</h2>
+      <div class="prevention-grid">
+        <div class="prevention-card">
+          <i class="fas fa-hand-paper"></i>
+          <h3>Auto-examen mensuel</h3>
+          <p>À pratiquer 3-5 jours après les règles. 70% des cas sont découverts par les femmes elles-mêmes.</p>
+        </div>
+        <div class="prevention-card">
+          <i class="fas fa-user-md"></i>
+          <h3>Consultation annuelle</h3>
+          <p>À partir de 40 ans, consultation gynécologique annuelle avec examen clinique des seins.</p>
+        </div>
+        <div class="prevention-card">
+          <i class="fas fa-x-ray"></i>
+          <h3>Mammographie</h3>
+          <p>Recommandée tous les 2 ans de 50 à 74 ans. Disponible dans 12 centres à Abidjan et 5 en régions.</p>
+        </div>
+        <div class="prevention-card">
+          <i class="fas fa-dna"></i>
+          <h3>Dépistage génétique</h3>
+          <p>Proposé à l'Institut Pasteur de Côte d'Ivoire pour les femmes à haut risque familial.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="awareness-banner">
+      <h2><i class="fas fa-calendar-alt"></i> Octobre Rose 2024 - Côte d'Ivoire</h2>
+      <p>En hommage à Nadiya Sabeh, le Mois du Cancer du Sein 2024 a été exceptionnel :</p>
+      <ul style="list-style: none; margin: 20px 0;">
+        <li><i class="fas fa-check"></i> 50,000 femmes dépistées gratuitement</li>
+        <li><i class="fas fa-check"></i> 300 villages visités par les caravanes médicales</li>
+        <li><i class="fas fa-check"></i> 1,200 survivantes formées aux auto-examens</li>
+        <li><i class="fas fa-check"></i> Fonds "Nadiya Sabeh" créé pour les traitements</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-hospital"></i> Centres de Dépistage en Côte d'Ivoire</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+          <h3><i class="fas fa-hospital-alt"></i> Abidjan</h3>
+          <ul>
+            <li>Institut National du Cancer (Treichville)</li>
+            <li>CHU de Cocody - Service d'oncologie</li>
+            <li>CHU de Yopougon - Centre de mammographie</li>
+            <li>Polyclinique Internationale Ste Marie</li>
+          </ul>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+          <h3><i class="fas fa-map-marker-alt"></i> Intérieur du pays</h3>
+          <ul>
+            <li>CHR de Bouaké - Service de gynécologie</li>
+            <li>CHU de Daloa - Centre de dépistage</li>
+            <li>CHR de Korhogo - Unité mobile</li>
+            <li>CHU de Man - Caravane mensuelle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2><i class="fas fa-heart"></i> Témoignages d'Espoir</h2>
+      <div class="testimonial">
+        <h3>Marie, 45 ans, Abidjan</h3>
+        <p>"Grâce à l'auto-examen, j'ai découvert une petite bosse en 2022. Le dépistage précoce a sauvé ma vie. Aujourd'hui, je suis guérie et je sensibilise d'autres femmes."</p>
+      </div>
+      <div class="testimonial">
+        <h3>Adjoua, 52 ans, Bouaké</h3>
+        <p>"La caravane médicale est passée dans mon village. J'ai fait le dépistage gratuitement. On a découvert un cancer au stade 1. Traitement réussi !"</p>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <a href="#" class="cta-button">
+        <i class="fas fa-phone"></i> Appeler le Numéro Vert : 0800 000 200
+      </a>
+      <a href="#" class="cta-button">
+        <i class="fas fa-calendar-check"></i> Prendre Rendez-vous
+      </a>
+      <a href="#" class="cta-button">
+        <i class="fas fa-share"></i> Partager cette Page
+      </a>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+  </script>
+</body>
+</html>

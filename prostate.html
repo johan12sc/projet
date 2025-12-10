@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer du Rein en Côte d'Ivoire - Prévention et Traitement</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 20px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #6f42c1;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #6f42c1;
+            padding-bottom: 10px;
+        }
+        
+        .symptom-card {
+            background: #f8f9fa;
+            border-left: 5px solid #6f42c1;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transform: transition-transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .risk-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .risk-card {
+            background: #fff;
+            border: 2px solid #6f42c1;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+        
+        .risk-card:hover {
+            background: #6f42c1;
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .risk-card i {
+            font-size: 2rem;
+            color: #6f42c1;
+            margin-bottom: 15px;
+        }
+        
+        .risk-card:hover i {
+            color: white;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(111, 66, 193, 0.3);
+        }
+        
+        .testimonial {
+            background: #f8f9fa;
+            border-left: 5px solid #6f42c1;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .testimonial h3 {
+            color: #6f42c1;
+            margin-bottom: 10px;
+        }
+        
+        .prevention-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .prevention-card {
+            background: #e8f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+
+           /* MENU LATÉRAL */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.sidebar .nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+
+.sidebar .nav-links a:hover,
+.sidebar .nav-links a.active {
+  background: #780bb8;
+  color: #c99adf;
+}
+
+.sidebar .close-btn {
+  align-self: flex-end;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1100;
+  background: #540581;
+  color: rgb(255, 255, 255);
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
+  display: none;
+}
+
+#menu-toggle:checked ~ .sidebar {
+  transform: translateX(0);
+}
+
+#menu-toggle:checked ~ .overlay {
+  display: block;
+}
+
+/* Responsive : menu visible en desktop */
+@media (min-width: 1024px) {
+  .sidebar {
+    transform: translateX(0);
+    position: fixed;
+  }
+
+  .hamburger,
+  .overlay,
+  .close-btn {
+    display: none !important;
+  }
+
+  body {
+    margin-left: 260px;
+  }
+}
+
+    </style>
+</head>
+<body>
+      <!-- MENU LATÉRAL -->
+<input type="checkbox" id="menu-toggle" class="hidden">
+<aside class="sidebar" id="sidebar">
+  <label for="menu-toggle" class="close-btn lg:hidden">
+    <i class="fas fa-times"></i>
+  </label>
+
+  <div class="logo">
+    <i class="fas fa-heartbeat text-green-400"></i>
+    <span>InfoSanté CI</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="Accueil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+    <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+   <!-- <a href="sante_maternelle.html" ><i class="fas fa-baby"></i> Santé Maternelle</a>
+    <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
+    <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
+    <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
+    <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
+    <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
+    <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
+    <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+    <a href="Se connecter.html"><i class="fas fa-envelope"></i>Se connecter</a>
+  </nav>
+</aside>
+
+<!-- Overlay mobile -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Bouton hamburger (visible uniquement en mobile) -->
+<label for="menu-toggle" class="hamburger lg:hidden">
+  <i class="fas fa-bars"></i>
+</label>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-kidney"></i> Cancer de la prostate en Côte d'Ivoire</h1>
+            <p>Information, prévention et traitement - Un guide complet</p>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-chart-pie"></i> Statistiques en Côte d'Ivoire</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">400-500</div>
+                    <div>Nouveaux cas par an</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60%</div>
+                    <div>Hommes touchés</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">55 ans</div>
+                    <div>Âge moyen de diagnostic</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">30%</div>
+                    <div>Guérison complète si détecté tôt</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-exclamation-circle"></i> Signes d'Alerte</h2>
+            <div class="symptom-card">
+                <h3><i class="fas fa-tint"></i> Sang dans les urines</h3>
+                <p>Présence de sang visible ou microscopique dans les urines - Consultez immédiatement.</p>
+            </div>
+            <div class="symptom-card">
+                <h3><i class="fas fa-back-pain"></i> Douleur lombaire persistante</h3>
+                <p>Douleur dans le bas du dos, souvent unilatérale, qui ne s'améliore pas avec le repos.</p>
+            </div>
+            <div class="symptom-card">
+                <h3><i class="fas fa-weight"></i> Perte de poids inexpliquée</h3>
+                <p>Perte de plus de 5% du poids corporel en 6 mois sans changement de régime.</p>
+            </div>
+            <div class="symptom-card">
+                <h3><i class="fas fa-thermometer-half"></i> Fièvre persistante</h3>
+                <p>Fièvre inexpliquée pendant plus de 3 semaines, souvent accompagnée de fatigue.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-user-times"></i> Facteurs de Risque en Côte d'Ivoire</h2>
+            <div class="risk-factors">
+                <div class="risk-card">
+                    <i class="fas fa-smoking"></i>
+                    <h3>Tabac</h3>
+                    <p>30% des cas liés au tabagisme. Arrêter de fumer réduit le risque de 50% en 10 ans.</p>
+                </div>
+                <div class="risk-card">
+                    <i class="fas fa-pills"></i>
+                    <h3>Auto-médication</h3>
+                    <p>Usage prolongé d'anti-douleurs sans prescription médicale en Côte d'Ivoire.</p>
+                </div>
+                <div class="risk-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Hypertension artérielle</h3>
+                    <p>Prévalence élevée en Côte d'Ivoire - 25% de la population adulte concernée.</p>
+                </div>
+                <div class="risk-card">
+                    <i class="fas fa-industry"></i>
+                    <h3>Pollution industrielle</h3>
+                    <p>Exposition aux produits chimiques dans certaines zones industrielles d'Abidjan.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-shield-alt"></i> Prévention</h2>
+            <div class="prevention-grid">
+                <div class="prevention-card">
+                    <i class="fas fa-apple-alt" style="font-size: 2rem; color: #6f42c1; margin-bottom: 15px;"></i>
+                    <h3>Régime alimentaire</h3>
+                    <p>Réduire la consommation de sel, éviter les aliments frits, privilégier fruits et légumes.</p>
+                </div>
+                <div class="prevention-card">
+                    <i class="fas fa-dumbbell" style="font-size: 2rem; color: #6f42c1; margin-bottom: 15px;"></i>
+                    <h3>Activité physique</h3>
+                    <p>30 minutes d'activité modérée par jour réduisent le risque de 20%.</p>
+                </div>
+                <div class="prevention-card">
+                    <i class="fas fa-tint" style="font-size: 2rem; color: #6f42c1; margin-bottom: 15px;"></i>
+                    <h3>Hydratation</h3>
+                    <p>Boire 2-3 litres d'eau par jour pour purifier les reins.</p>
+                </div>
+                <div class="prevention-card">
+                    <i class="fas fa-ban-smoking" style="font-size: 2rem; color: #6f42c1; margin-bottom: 15px;"></i>
+                    <h3>Arrêt du tabac</h3>
+                    <p>Consultations d'aide à l'arrêt disponibles dans tous les CHU.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-stethoscope"></i> Dépistage et Diagnostic</h2>
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin: 20px 0;">
+                <h3><i class="fas fa-calendar-check"></i> Examens recommandés</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 10px 0;"><i class="fas fa-check-circle" style="color: #6f42c1;"></i> Échographie rénale annuelle après 50 ans</li>
+                    <li style="margin: 10px 0;"><i class="fas fa-check-circle" style="color: #6f42c1;"></i> Examen des urines (bandelette) chaque consultation</li>
+                    <li style="margin: 10px 0;"><i class="fas fa-check-circle" style="color: #6f42c1;"></i> Créatininémie pour surveiller la fonction rénale</li>
+                    <li style="margin: 10px 0;"><i class="fas fa-check-circle" style="color: #6f42c1;"></i> TDM abdominale si symptômes</li>
+                </ul>
+                
+                <h4 style="margin-top: 20px; color: #6f42c1;">Centres de dépistage en Côte d'Ivoire :</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <strong>Abidjan</strong><br>
+                        CHU de Cocody - Service de néphrologie<br>
+                        CHU de Treichville - Service d'urologie<br>
+                        Polyclinique Internationale
+                    </div>
+                    <div style="background: white; padding: 15px; border-radius: 10px;">
+                        <strong>Intérieur</strong><br>
+                        CHR de Bouaké - Service de médecine<br>
+                        CHU de Daloa - Unité de néphrologie<br>
+                        CHR de Korhogo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-heart"></i> Témoignages</h2>
+            <div class="testimonial">
+                <h3>Kouadio, 58 ans, Abidjan</h3>
+                <p>"J'ai découvert le cancer suite à des urines rouges. Grâce à la chirurgie au CHU de Cocody et aux traitements, je suis en rémission complète depuis 2 ans. Le dépistage précoce a sauvé ma vie."</p>
+            </div>
+            <div class="testimonial">
+                <h3>Fatoumata, 45 ans, Bouaké</h3>
+                <p>"Ma fille m'a poussé à faire des examens après des douleurs persistantes. On a découvert une tumeur au rein. Le traitement a été long mais efficace. Aujourd'hui, je sensibilise mon entourage."</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="#" class="cta-button">
+                <i class="fas fa-phone"></i> Numéro Vert Cancer : 0800 000 300
+            </a>
+            <a href="#" class="cta-button">
+                <i class="fas fa-map-marker-alt"></i> Trouver un Centre de Dépistage
+            </a>
+            <a href="#" class="cta-button">
+                <i class="fas fa-download"></i> Télécharger le Guide de Prévention
+            </a>
+        </div>
+    </div>
+    
+  <!-- Script -->
+  <script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+  </script>
+</body>
+</html>
