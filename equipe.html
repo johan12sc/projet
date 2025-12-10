@@ -5,164 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notre Équipe - InfoSanté CI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<style>
-       /* MENU LATÉRAL */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 260px;
-  height: 100vh;
-  background: #fff;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-  transform: translateX(-100%);
-  transition: transform 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
 
-.sidebar .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 30px;
-}
+        /* MENU LATÉRAL */
+        .sidebar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 260px;
+          height: 100vh;
+          background: #fff;
+          box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+          z-index: 1000;
+          transform: translateX(-100%);
+          transition: transform 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+        }
 
-.sidebar .nav-links a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  color: #555;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-}
+        .sidebar .logo {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 1.3rem;
+          font-weight: bold;
+          color: #333;
+          margin-bottom: 30px;
+        }
 
-.sidebar .nav-links a:hover,
-.sidebar .nav-links a.active {
-  background: #e3f2fd;
-  color: #039960;
-}
+        .sidebar .nav-links a {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 10px;
+          margin-bottom: 10px;
+          border-radius: 8px;
+          color: #555;
+          text-decoration: none;
+          transition: background 0.3s, color 0.3s;
+        }
 
-.sidebar .close-btn {
-  align-self: flex-end;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #999;
-}
+        .sidebar .nav-links a:hover,
+        .sidebar .nav-links a.active {
+          background: #e3f2fd;
+          color: #039960;
+        }
 
-.hamburger {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1100;
-  background: #075229;
-  color: white;
-  padding: 10px 14px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
+        .sidebar .close-btn {
+          align-self: flex-end;
+          font-size: 1.5rem;
+          cursor: pointer;
+          color: #999;
+        }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  z-index: 999;
-  display: none;
-}
+        .hamburger {
+          position: fixed;
+          top: 20px;
+          left: 20px;
+          z-index: 1100;
+          background: #075229;
+          color: white;
+          padding: 10px 14px;
+          border-radius: 50%;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
 
-#menu-toggle:checked ~ .sidebar {
-  transform: translateX(0);
-}
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.4);
+          z-index: 999;
+          display: none;
+        }
 
-#menu-toggle:checked ~ .overlay {
-  display: block;
-}
+        #menu-toggle:checked ~ .sidebar {
+          transform: translateX(0);
+        }
 
-/* Responsive : menu visible en desktop */
-@media (max-width: 700px) {
-  .sidebar {
-    transform: translateX(0);
-    position: fixed;
-  }
+        #menu-toggle:checked ~ .overlay {
+          display: block;
+        }
 
-  .hamburger,
-  .overlay,
-  .close-btn {
-    display: none !important;
-  }
+        /* HEADER - visible uniquement desktop */
+        .page-header {
+          background: white;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          display: none;
+        }
 
-  body {
-    margin-left: 260px;
-  }
-}
+        .page-header nav {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 1rem 1.5rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
 
-</style>
+        .page-header .logo-section {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #166534;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
 
+        .page-header .nav-links-header {
+          display: flex;
+          gap: 1.5rem;
+        }
+
+        .page-header .nav-links-header a {
+          color: #166534;
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s;
+        }
+
+        .page-header .nav-links-header a:hover {
+          color: #0d9488;
+        }
+
+        /* RESPONSIVE - Point de rupture à 770px */
+        
+        /* Par défaut (mobile < 770px) : SIDEBAR + BURGER visible, HEADER caché */
+        @media (min-width: 770px) {
+          .page-header {
+            display: block;
+          }
+
+          .sidebar {
+            display: none;
+          }
+
+          .hamburger {
+            display: none;
+          }
+
+          .overlay {
+            display: none;
+          }
+        }
+    </style>
 </head>
-  <!-- MENU LATÉRAL -->
-<input type="checkbox" id="menu-toggle" class="hidden">
-<aside class="sidebar" id="sidebar">
-  <label for="menu-toggle" class="close-btn lg:hidden">
-    <i class="fas fa-times"></i>
-  </label>
-
-  <div class="logo">
-    <i class="fas fa-heartbeat text-green-400"></i>
-    <span>InfoSanté CI</span>
-  </div>
-
-  <nav class="nav-links">
-    <a href="Accueil.html" class="active"><i class="fas fa-home"></i> Accueil</a>
-    <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
-   <!-- <a href="sante_maternelle.html" ><i class="fas fa-baby"></i> Santé Maternelle</a>
-    <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a> -->
-    <!-- <a href="paludisme.html"><i class="fas fa-bug"></i> Paludisme</a>
-    <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a> -->
-    <!-- <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
-    <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
-    <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
-    <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
-    <a href="Se connecter.html"><i class="fas fa-envelope"></i> Se connecter</a>
-  </nav>
-</aside>
-
-<!-- Overlay mobile -->
-<div class="overlay" id="overlay"></div>
-
-<!-- Bouton hamburger (visible uniquement en mobile) -->
-<label for="menu-toggle" class="hamburger lg:hidden">
-  <i class="fas fa-bars"></i>
-</label>
-
-
 <body class="bg-gradient-to-br from-green-800 to-teal-900 min-h-screen text-gray-800">
-    <header class="bg-white shadow-lg">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="text-2xl font-bold text-green-800 flex items-center">
-                    <i class="fas fa-heartbeat text-green-600 mr-2"></i>
-                    InfoSanté CI
-                </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Accueil</a>
-                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Fiches Santé</a>
-                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Notre Équipe</a>
-                    <a href="#" class="text-green-800 hover:text-teal-600 transition-colors duration-300 font-medium">Contact</a>
-                </div>
+
+    <input type="checkbox" id="menu-toggle" class="hidden">
+    
+    <!-- MENU LATÉRAL (visible < 770px) -->
+    <aside class="sidebar" id="sidebar">
+        <label for="menu-toggle" class="close-btn">
+            <i class="fas fa-times"></i>
+        </label>
+
+        <div class="logo"><br><br>
+            <i class="fas fa-heartbeat text-green-400"></i>
+            <span>InfoSanté CI</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+            <a href="fiche.html"><i class="fas fa-newspaper"></i>Fiche de Santé</a>
+            <a href="equipe.html" class="active"><i class="fas fa-users"></i> Notre Équipe</a>
+            <a href="Se connecter.html"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+    </aside>
+
+    <!-- Overlay mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Bouton hamburger (visible < 770px) -->
+    <label for="menu-toggle" class="hamburger">
+        <i class="fas fa-bars"></i>
+    </label>
+
+    <!-- HEADER (visible ≥ 770px) -->
+    <header class="page-header">
+        <nav>
+            <div class="logo-section">
+                <i class="fas fa-heartbeat" style="color: #10b981;"></i>
+                InfoSanté CI
+            </div>
+            <div class="nav-links-header">
+                <a href="Accueil.html">Accueil</a>
+                <a href="fiche.html">Fiches Santé</a>
+                <a href="actualite.html">Actualités</a>
+                <a href="equipe.html">Notre Équipe</a>
+                <a href="Se connecter.html">Se connecter</a>
             </div>
         </nav>
     </header>
@@ -262,6 +310,79 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Membre 4 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Responsable Communication" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mariam TRAORÉ</h3>
+                        <p class="text-purple-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullhorn mr-2"></i>
+                            Responsable Communication
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Gestion des réseaux sociaux et création de contenu éducatif. Développe les campagnes de sensibilisation et les publications Facebook.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Membre 5 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Responsable Communication" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mariam TRAORÉ</h3>
+                        <p class="text-purple-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullhorn mr-2"></i>
+                            Responsable Communication
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Gestion des réseaux sociaux et création de contenu éducatif. Développe les campagnes de sensibilisation et les publications Facebook.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Membre 6 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.3s;">
+                    <div class="h-64 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center overflow-hidden">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Responsable Communication" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Mariam TRAORÉ</h3>
+                        <p class="text-purple-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullhorn mr-2"></i>
+                            Responsable Communication
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Gestion des réseaux sociaux et création de contenu éducatif. Développe les campagnes de sensibilisation et les publications Facebook.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-purple-600 hover:text-purple-700 transition-colors">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -276,7 +397,31 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Membre 4 -->
+                <!-- Membre 7 -->
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.4s;">
+                    <div class="h-64 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center overflow-hidden">
+                        <img src="images/ali.jpg" alt="Développeur Full Stack" class="w-full h-full object-cover" >
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Ouattara Ali</h3>
+                        <p class="text-green-600 font-semibold mb-3 flex items-center">
+                            <i class="fas fa-code mr-2"></i>
+                            Développeur 
+                        </p>
+                        <p class="text-gray-600 mb-4">
+                            Chef développeur du site web InfoSanté CI. Maîtrise HTML, TailwindCSS et la structuration de contenu. Architecture des 3 pages du site.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-green-600 hover:text-green-700 transition-colors">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="text-green-600 hover:text-green-700 transition-colors">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Membre 8 -->
                 <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.4s;">
                     <div class="h-64 bg-gradient-to-br from-green-400 to-teal-500 flex items-center justify-center overflow-hidden">
                         <img src="images/ali.jpg" alt="Développeur Full Stack" class="w-full h-full object-cover" >
@@ -301,7 +446,7 @@
                     </div>
                 </div>
 
-                <!-- Membre 5 -->
+                <!-- Membre 9 -->
                 <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.5s;">
                     <div class="h-64 bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center overflow-hidden">
                         <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Spécialiste Base de Données" class="w-full h-full object-cover">
@@ -326,7 +471,7 @@
                     </div>
                 </div>
 
-                <!-- Membre 6 -->
+                <!-- Membre 10 -->
                 <div class="bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-3xl animate-fade-in" style="animation-delay: 0.6s;">
                     <div class="h-64 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center overflow-hidden">
                         <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Data Scientist" class="w-full h-full object-cover">
@@ -408,30 +553,4 @@
                         <i class="fas fa-heartbeat text-green-500 mr-2"></i> InfoSanté CI
                     </a>
                 </div>
-                <p class="text-gray-400">&copy; 2025 InfoSanté CI. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
-
-    <style>
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-        }
-    </style>
-
-  <!-- Script -->
-  <script>
-    // Fermer le menu si on clique sur un lien (mobile)
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('menu-toggle').checked = false;
-      });
-    });
-  </script>
-</body>
-</html>
+                <p class="text-gray-400">&copy; 2025 Info
