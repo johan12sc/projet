@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Fiche de Santé - InfoSanté CI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .slide-in { animation: slideIn 0.6s ease-out; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        
+        .input-field:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .photo-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #10b981;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .tab-btn {
+            position: relative;
+            padding: 12px 24px;
+            background: transparent;
+            border: none;
+            color: #6b7280;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: #10b981;
+        }
+        
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .sidebar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .sidebar .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            color: #555;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .sidebar .nav-links a:hover,
+        .sidebar .nav-links a.active {
+            background: #e3f2fd;
+            color: #039960;
+        }
+        
+        .hamburger {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1100;
+            background: #075229;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+            display: none;
+        }
+        
+        #menu-toggle:checked ~ .sidebar {
+            transform: translateX(0);
+        }
+        
+        #menu-toggle:checked ~ .overlay {
+            display: block;
+        }
+        
+        .page-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: none;
+        }
+        
+        .page-header nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        @media (min-width: 770px) {
+            .page-header { display: block; }
+            .sidebar { display: none; }
+            .hamburger { display: none; }
+            .overlay { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen">
+
+    <input type="checkbox" id="menu-toggle" class="hidden">
+    
+    <!-- SIDEBAR MOBILE -->
+    <aside class="sidebar">
+        <label for="menu-toggle" class="close-btn self-end text-2xl cursor-pointer text-gray-400">
+            <i class="fas fa-times"></i>
+        </label>
+        <div class="logo"><br>
+            <i class="fas fa-heartbeat text-green-400"></i>
+            <span>InfoSanté CI</span>
+        </div>
+        <nav class="nav-links">
+            <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
+            <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
+            <a href="fiche.html" class="active"><i class="fas fa-file-medical"></i> Fiche de Santé</a>
+            <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
+            <a href="Se connecter.html"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+    </aside>
+    
+    <div class="overlay"></div>
+    
+    <label for="menu-toggle" class="hamburger">
+        <i class="fas fa-bars"></i>
+    </label>
+    
+    <!-- HEADER DESKTOP -->
+    <header class="page-header">
+        <nav>
+            <div class="logo-section flex items-center gap-2 text-xl font-bold text-green-700">
+                <i class="fas fa-heartbeat text-green-500"></i>
+                InfoSanté CI
+            </div>
+            <div class="nav-links-header flex gap-6">
+                <a href="Accueil.html" class="text-green-700 font-medium hover:text-teal-600">Accueil</a>
+                <a href="fiche.html" class="text-green-700 font-medium hover:text-teal-600">Fiches Santé</a>
+                <a href="actualite.html" class="text-green-700 font-medium hover:text-teal-600">Actualités</a>
+                <a href="equipe.html" class="text-green-700 font-medium hover:text-teal-600">Notre Équipe</a>
+                <a href="Se connecter.html" class="text-green-700 font-medium hover:text-teal-600">Se connecter</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <div class="relative py-16 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-600 to-teal-600 opacity-10"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center fade-in">
+            <div class="inline-block p-3 bg-green-100 rounded-full mb-4">
+                <i class="fas fa-file-medical-alt text-4xl text-green-600"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Ma Fiche de Santé
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Créez et consultez votre fiche de santé personnelle en toute sécurité
+            </p>
+        </div>
+    </div>
+
+    <!-- TABS SECTION -->
+    <div class="container mx-auto px-6 pb-16">
+        <div class="max-w-4xl mx-auto">
+            <!-- TABS BUTTONS -->
+            <div class="glass-effect rounded-t-2xl shadow-lg p-4 flex justify-center gap-8 slide-in">
+                <button class="tab-btn active" onclick="switchTab('create')">
+                    <i class="fas fa-plus-circle mr-2"></i>
+                    Créer ma fiche
+                </button>
+                <button class="tab-btn" onclick="switchTab('view')">
+                    <i class="fas fa-eye mr-2"></i>
+                    Voir ma fiche
+                </button>
+            </div>
+
+            <!-- TAB CONTENT: CRÉER FICHE -->
+            <div id="create-tab" class="tab-content glass-effect rounded-b-2xl shadow-2xl p-8 md:p-12 fade-in">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+                    <i class="fas fa-clipboard-list text-green-600 mr-2"></i>
+                    Créer votre Fiche de Santé
+                </h2>
+
+                <form action="save_fiche.php" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    
+                    <!-- PHOTO -->
+                    <div class="text-center mb-8">
+                        <label class="block text-sm font-semibold text-gray-700 mb-4">Photo de profil</label>
+                        <div class="flex justify-center mb-4">
+                            <img id="photo-preview" src="https://via.placeholder.com/150" alt="Preview" class="photo-preview">
+                        </div>
+                        <label class="inline-block cursor-pointer bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            <i class="fas fa-camera mr-2"></i>
+                            Choisir une photo
+                            <input type="file" name="photo" id="photo-input" accept="image/*,.pdf" class="hidden" onchange="previewPhoto(event)" required>
+                        </label>
+                        <p class="text-xs text-gray-500 mt-2">JPG, PNG, PDF acceptés</p>
+                    </div>
+
+                    <!-- IDENTITÉ -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user text-green-600 mr-1"></i> Nom *
+                            </label>
+                            <input type="text" name="nom" required 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user text-green-600 mr-1"></i> Prénoms *
+                            </label>
+                            <input type="text" name="prenoms" required 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-birthday-cake text-green-600 mr-1"></i> Âge *
+                            </label>
+                            <input type="number" name="age" min="0" max="120" required 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-venus-mars text-green-600 mr-1"></i> Sexe *
+                            </label>
+                            <select name="sexe" required 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                                <option value="">Choisir...</option>
+                                <option value="Homme">Homme</option>
+                                <option value="Femme">Femme</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-tint text-red-600 mr-1"></i> Groupe Sanguin
+                            </label>
+                            <select name="groupe_sanguin" 
+                                    class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                                <option value="">Choisir...</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- MESURES -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-weight text-green-600 mr-1"></i> Poids (kg)
+                            </label>
+                            <input type="number" name="poids" step="0.1" 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-ruler-vertical text-green-600 mr-1"></i> Taille (cm)
+                            </label>
+                            <input type="number" name="taille" step="0.1" 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- INFORMATIONS MÉDICALES -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-virus text-red-600 mr-1"></i> Maladie Principale
+                        </label>
+                        <input type="text" name="maladie" 
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                               placeholder="Ex: Diabète, Hypertension...">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-heartbeat text-green-600 mr-1"></i> État Actuel *
+                        </label>
+                        <select name="etat" required 
+                                class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none">
+                            <option value="Stable">Stable</option>
+                            <option value="Sous traitement">Sous traitement</option>
+                            <option value="Critique">Critique</option>
+                            <option value="En rémission">En rémission</option>
+                            <option value="Guéri">Guéri</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-pills text-blue-600 mr-1"></i> Traitement en cours
+                        </label>
+                        <textarea name="traitement" rows="3" 
+                                  class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                                  placeholder="Décrivez les médicaments et traitements..."></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-exclamation-triangle text-yellow-600 mr-1"></i> Allergies
+                        </label>
+                        <input type="text" name="allergies" 
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                               placeholder="Ex: Pénicilline, Arachides...">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-history text-purple-600 mr-1"></i> Antécédents Médicaux
+                        </label>
+                        <textarea name="antecedents" rows="3" 
+                                  class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                                  placeholder="Maladies passées, chirurgies, hospitalisations..."></textarea>
+                    </div>
+
+                    <!-- CONTACTS -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-phone-alt text-red-600 mr-1"></i> Contact d'Urgence *
+                            </label>
+                            <input type="tel" name="contact_urgence" required 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                                   placeholder="+225 XX XX XX XX XX">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user-md text-blue-600 mr-1"></i> Médecin Traitant
+                            </label>
+                            <input type="text" name="medecin_traitant" 
+                                   class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                                   placeholder="Dr. Nom du médecin">
+                        </div>
+                    </div>
+
+                    <!-- MOT DE PASSE -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-lock text-gray-600 mr-1"></i> Mot de Passe (pour voir votre fiche) *
+                        </label>
+                        <input type="password" name="mot_de_passe" required minlength="6"
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:outline-none"
+                               placeholder="Minimum 6 caractères">
+                    </div>
+
+                    <!-- SUBMIT -->
+                    <div class="text-center pt-6">
+                        <button type="submit" class="btn-primary text-white px-12 py-4 rounded-xl font-bold text-lg shadow-lg">
+                            <i class="fas fa-save mr-2"></i>
+                            Enregistrer ma Fiche
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TAB CONTENT: VOIR FICHE -->
+            <div id="view-tab" class="tab-content glass-effect rounded-b-2xl shadow-2xl p-8 md:p-12 hidden">
+                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+                    <i class="fas fa-eye text-blue-600 mr-2"></i>
+                    Consulter ma Fiche de Santé
+                </h2>
+
+                <form action="login_fiche.php" method="POST" class="max-w-md mx-auto space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-user text-blue-600 mr-1"></i> Nom
+                        </label>
+                        <input type="text" name="nom" required 
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-user text-blue-600 mr-1"></i> Prénoms
+                        </label>
+                        <input type="text" name="prenoms" required 
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-lock text-blue-600 mr-1"></i> Mot de Passe
+                        </label>
+                        <input type="password" name="mot_de_passe" required 
+                               class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
+
+                    <div class="text-center pt-4">
+                        <button type="submit" class="btn-secondary text-white px-12 py-4 rounded-xl font-bold text-lg shadow-lg w-full">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Voir ma Fiche
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SWITCH TABS
+        function switchTab(tab) {
+            const createTab = document.getElementById('create-tab');
+            const viewTab = document.getElementById('view-tab');
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+            
+            if (tab === 'create') {
+                createTab.classList.remove('hidden');
+                viewTab.classList.add('hidden');
+                tabBtns[0].classList.add('active');
+            } else {
+                createTab.classList.add('hidden');
+                viewTab.classList.remove('hidden');
+                tabBtns[1].classList.add('active');
+            }
+        }
+        
+        // PREVIEW PHOTO
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('photo-preview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+</body>
+</html>

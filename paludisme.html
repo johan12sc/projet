@@ -63,7 +63,7 @@
         .sidebar .nav-links a:hover,
         .sidebar .nav-links a.active {
           background: #e3f2fd;
-          color: #22cf3fff;
+          color: #039960;
         }
 
         .sidebar .close-btn {
@@ -78,7 +78,7 @@
           top: 20px;
           left: 20px;
           z-index: 1100;
-          background: #05e7639c;
+          background: #075229;
           color: white;
           padding: 10px 14px;
           border-radius: 50%;
@@ -105,68 +105,26 @@
           display: block;
         }
 
-        /* HEADER - visible uniquement desktop */
-        .page-header {
-          background: white;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          display: none;
-        }
-
-        .page-header nav {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 1rem 1.5rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .page-header .logo-section {
-          font-size: 1.5rem;
-          font-weight: bold;
-          color: #166534;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .page-header .nav-links-header {
-          display: flex;
-          gap: 1.5rem;
-        }
-
-        .page-header .nav-links-header a {
-          color: #166534;
-          text-decoration: none;
-          font-weight: 500;
-          transition: color 0.3s;
-        }
-
-        .page-header .nav-links-header a:hover {
-          color: #0d9488;
-        }
-
-        /* RESPONSIVE - Point de rupture à 770px */
-        
-        /* Par défaut (mobile < 770px) : SIDEBAR + BURGER visible, HEADER caché */
-        @media (min-width: 770px) {
-          .page-header {
-            display: block;
-          }
-
+        /* Responsive : menu visible en desktop */
+        @media (min-width: 1024px) {
           .sidebar {
-            display: none;
+            transform: translateX(0);
           }
 
           .hamburger {
             display: none;
           }
-
+          
           .overlay {
             display: none;
+          }
+          
+          .sidebar .close-btn {
+            display: none;
+          }
+
+          body {
+            margin-left: 260px;
           }
         }
 
@@ -178,8 +136,8 @@
     </style>
 </head>
 <body>
-    <!-- MENU LATÉRAL (visible < 770px) -->
-    <input type="checkbox" id="menu-toggle" class="hidden" style="display:none;">
+    <!-- MENU LATÉRAL -->
+    <input type="checkbox" id="menu-toggle" style="display:none;">
     <aside class="sidebar" id="sidebar">
       <label for="menu-toggle" class="close-btn">
         <i class="fas fa-times"></i>
@@ -193,57 +151,29 @@
       <nav class="nav-links">
         <a href="Accueil.html"><i class="fas fa-home"></i> Accueil</a>
         <a href="actualite.html"><i class="fas fa-newspaper"></i> Actualités</a>
-        <!-- <a href="sante_maternelle.html"><i class="fas fa-baby"></i> Santé Maternelle</a>
-        <a href="malnutrition.html"><i class="fas fa-baby"></i> Malnutrition</a>
-        <a href="paludisme.html" class="active"><i class="fas fa-bug"></i> Paludisme</a>
-        <a href="rein.html"><i class="fas fa-kidney"></i> Cancer du Rein</a>
-        <a href="cancer_sein.html"><i class="fas fa-ribbon"></i> Cancer du Sein</a>
-        <a href="prostate.html"><i class="fas fa-male"></i> Cancer Prostate</a>
-        <a href="hygiene.html"><i class="fas fa-hands-wash"></i> Hygiène 2025</a> -->
         <a href="equipe.html"><i class="fas fa-users"></i> Notre Équipe</a>
-        <a href="Se connecter.html"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="Se connecter.html"><i class="fas fa-envelope"></i> Se connecter</a>
       </nav>
     </aside>
 
     <!-- Overlay mobile -->
     <div class="overlay" id="overlay"></div>
 
-    <!-- Bouton hamburger (visible < 770px) -->
+    <!-- Bouton hamburger (visible uniquement en mobile) -->
     <label for="menu-toggle" class="hamburger">
       <i class="fas fa-bars"></i>
     </label>
-
-    <!-- HEADER (visible ≥ 770px) -->
-    <header class="page-header">
-      <nav>
-        <div class="logo-section">
-          <i class="fas fa-heartbeat" style="color: #10b981;"></i>
-          InfoSanté CI
-        </div>
-        <div class="nav-links-header">
-          <a href="Accueil.html">Accueil</a>
-          <a href="Accueil.html.#fiches">Fiches Santé</a>
-          <a href="actualite.html">Actualités</a>
-          <a href="equipe.html">Notre Équipe</a>
-          <a href="Se connecter.html">Se connecter</a>
-        </div>
-      </nav>
-    </header>
 
     <div class="container">
         <div class="header">
             <h1><i class="fas fa-bug"></i> Paludisme en Côte d'Ivoire</h1>
             <p>Prévention, traitement rapide, éradication</p>
         </div>
-
-        <div style="height: 14rem; overflow: hidden; border-radius: 15px; margin-bottom: 30px;">
-            <img src="images/paludisme.jpg" 
-                 alt="Paludisme" 
-                 style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;"
-                 onmouseover="this.style.transform='scale(1.1)'"
-                 onmouseout="this.style.transform='scale(1)'">
-        </div>
-
+<div class="h-56 overflow-hidden">
+                        <img src="images/paludisme.jpg" 
+                             alt="Nutrition" 
+                             class="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110">
+                    </div>
         <div class="section">
             <h2><i class="fas fa-chart-line"></i> Impact local</h2>
             <div class="grid">
