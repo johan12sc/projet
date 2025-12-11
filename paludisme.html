@@ -206,23 +206,50 @@
         </div>
 
         <div style="text-align:center;margin:40px 0;">
-            <a class="cta-button" href="#"><i class="fas fa-phone"></i> Numéro vert CNLP : 143</a>
-            <a class="cta-button" href="#"><i class="fas fa-map-marker-alt"></i> Trouver un centre de test</a>
-        </div>
-    </div>
+    <a class="cta-button" href="#"><i class="fas fa-phone"></i> Numéro vert CNLP : 143</a>
+    <a class="cta-button" href="#" onclick="findCenters(); return false;"><i class="fas fa-map-marker-alt"></i> Trouver un centre de test</a>
+</div>
+</div>
 
-    <script>
-        // Fermer le menu si on clique sur un lien (mobile)
-        document.querySelectorAll('.nav-links a').forEach(link => {
-          link.addEventListener('click', () => {
-            document.getElementById('menu-toggle').checked = false;
-          });
-        });
+<script>
+function findCenters() {
+  // Vérifier si la géolocalisation est disponible
+  if (!navigator.geolocation) {
+    alert("La géolocalisation n'est pas supportée sur ce navigateur.");
+    return;
+  }
 
-        // Fermer le menu si on clique sur l'overlay
-        document.getElementById('overlay').addEventListener('click', () => {
-          document.getElementById('menu-toggle').checked = false;
-        });
-    </script>
+  // Demander la position de l'utilisateur
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      // Créer le lien Google Maps qui montre les centres de santé
+      const mapsUrl = `https://www.google.com/maps/search/centre+de+sant%C3%A9/@${lat},${lng},15z`;
+
+      // Ouvrir Google Maps
+      window.open(mapsUrl, "_blank");
+    },
+    function() {
+      alert("Impossible d'obtenir votre position. Activez la localisation.");
+    }
+  );
+}
+</script>
+
+<script>
+    // Fermer le menu si on clique sur un lien (mobile)
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('menu-toggle').checked = false;
+      });
+    });
+
+    // Fermer le menu si on clique sur l'overlay
+    document.getElementById('overlay').addEventListener('click', () => {
+      document.getElementById('menu-toggle').checked = false;
+    });
+</script>
 </body>
 </html>
